@@ -13,6 +13,7 @@ def f_drev(array):
     f_d_x= np.cos(x)
     f_d_y= -np.sin(y)
     f_d_z= np.cos(z)
+
     return np.array([f_d_x,f_d_y,f_d_z])
 
 if __name__=='__main__':
