@@ -4,7 +4,8 @@ from scipy.optimize import check_grad
 def MSE(W,X,Y):
     y_pred=np.dot(X,W)
     error=(y_pred-Y)**2
-    return  np.sum(error)/(X.shape[0]*2)
+    cost=np.sum(error)/(X.shape[0]*2)
+    return  cost
 
 def MSE_Drev(W,X,Y):
     y_pred = np.dot(X, W)

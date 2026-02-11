@@ -11,7 +11,8 @@ def load_data(path,preprocessing):
     elif preprocessing ==2:
         scaller=StandardScaler()
         x = scaller.fit_transform(x)
-
+    elif preprocessing==0:
+        x = df.iloc[:, :-1]
     return df,x,y
 
 def add_bias_columns(X):

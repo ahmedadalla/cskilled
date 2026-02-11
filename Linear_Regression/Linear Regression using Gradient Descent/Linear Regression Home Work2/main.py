@@ -3,19 +3,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 from data_helpers import load_data,add_bias_columns
 from gradient_decent_linear_reg import gradient_descent_linear_regression
+from regresion_helpers import train,predict,visualize_cost
+from optimization import optimize
+from investigate_features import  investigate
 
 parser=argparse.ArgumentParser(description="linear regression")
-
-
 parser.add_argument('--data',type=str,default='data/dataset_200x4_regression.csv',help='data location')
 parser.add_argument('--preprocessing' ,default=1,type=int,help='0 for non'
                                                                             '1 for minmax'
                                                                             '2 for standard')
 parser.add_argument('--choice',type=int,default=1,help='0 for verification'
-                                                                    '1 train with all features')
+                                                                    '1 train with all features'
+                                                                    '2 train with best feature')
 
-parser.add_argument('--step_size',type=float,help='step size',default=0.01)
-parser.add_argument('--precision',type=float,help='precision',default=0.0001)
+parser.add_argument('--step_size',type=float,help='step size',default=0.001)
+parser.add_argument('--precision',type=float,help='precision',default=0.00001)
 parser.add_argument('--max_iter',type=int,help='step size',default=1000)
 
 
@@ -40,5 +42,11 @@ else:
     x = add_bias_columns(x)
 if args.choice==1:
     w=np.array([1.,1.,1.,1.])
-    optimal_w,costH=gradient_descent_linear_regression(x,y,w,max_iter=args.max_iter,step_size=args.step_size,precision=args.precision)
+    optimal_w,costH=train(x,y,w,max_iter=args.max_iter,step_size=args.step_size,precision=args.precision)
+    y_pred=predict(x,optimal_w)
+
+
+
+
+
 
