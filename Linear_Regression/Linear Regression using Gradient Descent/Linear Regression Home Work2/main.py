@@ -12,7 +12,7 @@ parser.add_argument('--data',type=str,default='data/dataset_200x4_regression.csv
 parser.add_argument('--preprocessing' ,default=1,type=int,help='0 for non'
                                                                             '1 for minmax'
                                                                             '2 for standard')
-parser.add_argument('--choice',type=int,default=1,help='0 for verification'
+parser.add_argument('--choice',type=int,default=2,help='0 for verification'
                                                                     '1 train with all features'
                                                                     '2 train with best feature')
 
@@ -45,8 +45,12 @@ if args.choice==1:
     optimal_w,costH=train(x,y,w,max_iter=args.max_iter,step_size=args.step_size,precision=args.precision)
     y_pred=predict(x,optimal_w)
 
-
-
+elif args.choice==2:
+    x=x[:,0]
+    x=x.reshape((-1,1))
+    optimal_w, costH = train(x, y, max_iter=args.max_iter, step_size=args.step_size, precision=args.precision)
+    y_pred = predict(x, optimal_w)
+    visualize_cost(costH)
 
 
 
